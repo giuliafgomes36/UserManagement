@@ -1,19 +1,25 @@
 package org.example.model;
 
+import java.util.UUID;
+
 public class User {
-    private final Long id; //final: the value cannot be reassigned.
+    private final String id; //final: the value cannot be reassigned.
     private String name;
     private String email;
     private int age;
 
-    public User(Long id, String name, String email, int age) {
-        this.id = id;
+    public User() {
+        this.id = UUID.randomUUID().toString();
+    }
+
+    public User(String name, String email, int age) {
+        this.id = UUID.randomUUID().toString();
         this.name = name;
         this.email = email;
         this.age = age;
     }
 
-    public Long getId() {
+    public String getId() {
         return id;
     }
 
