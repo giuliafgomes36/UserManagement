@@ -1,5 +1,7 @@
 package org.example.model;
 
+import org.example.exception.UserAlreadyExistsException;
+import org.example.exception.UserDoesNotExistsException;
 import org.example.service.UserService;
 
 import java.util.Scanner;
@@ -9,37 +11,41 @@ public class Main {
     System.out.println("\u001B[42m" + "WELCOME TO USER MANAGEMENT" + "\u001B[0m");
         var runProgram = "run";
 
-        while(runProgram.equalsIgnoreCase("run"))
+        while(runProgram.equals("run"))
         {
-            Scanner scanner = new Scanner(System.in);
+            try {
+                Scanner scanner = new Scanner(System.in);
 
-            printActions();
-            var input = scanner.next();
+                printActions();
+                var input = scanner.next();
 
-            UserService userService = new UserService();
+                UserService userService = new UserService();
 
-            switch(input) {
-                case "1":
-                    addUser(userService, scanner);
-                    break;
-                case "2":
-                    updateUserName(userService, scanner);
-                    break;
-                case "3":
-                    updateUserAge(userService, scanner);
-                    break;
-                case "4":
-                    deleteUser(userService, scanner);
-                    break;
-                case "5":
-                    printUserList(userService);
-                    break;
-                case "6":
-                    runProgram = "stop";
-                    printServiceTitle("Bye! ;)");
-                    break;
-                default:
-                    printErrorMessage("Select a valid option");
+                switch(input) {
+                    case "1":
+                        addUser(userService, scanner);
+                        break;
+                    case "2":
+                        updateUserName(userService, scanner);
+                        break;
+                    case "3":
+                        updateUserAge(userService, scanner);
+                        break;
+                    case "4":
+                        deleteUser(userService, scanner);
+                        break;
+                    case "5":
+                        printUserList(userService);
+                        break;
+                    case "6":
+                        runProgram = "stop";
+                        printServiceTitle("Bye! ;)");
+                        break;
+                    default:
+                        printErrorMessage("Select a valid option");
+                }
+            } catch (UserAlreadyExistsException | UserDoesNotExistsException exception) {
+                printErrorMessage(exception.getMessage());
             }
         }
     }
