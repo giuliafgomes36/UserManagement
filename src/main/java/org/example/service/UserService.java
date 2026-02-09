@@ -48,6 +48,14 @@ public class UserService {
         }
     }
 
+    public ArrayList<User> getUserList() {
+        return userList;
+    }
+
+    public void setUserList(ArrayList<User> userList) {
+        UserService.userList = userList;
+    }
+
     //true: user exists, false: user does not exist.
     private boolean checkIfUserExists(String email) {
         return userList.stream().anyMatch(x -> x.getEmail().equalsIgnoreCase(email));
