@@ -1,9 +1,12 @@
 package org.example.model;
 
+import org.example.exception.InvalidUserEmailException;
 import org.example.exception.UserAlreadyExistsException;
 import org.example.exception.UserDoesNotExistsException;
+import org.example.exception.InvalidUserNameException;
 import org.example.service.UserService;
 
+import java.util.InputMismatchException;
 import java.util.Scanner;
 
 public class Main {
@@ -44,8 +47,11 @@ public class Main {
                     default:
                         printErrorMessage("Select a valid option");
                 }
-            } catch (UserAlreadyExistsException | UserDoesNotExistsException exception) {
+            } catch (UserAlreadyExistsException | UserDoesNotExistsException | InvalidUserNameException |
+                     InvalidUserEmailException exception) {
                 printErrorMessage(exception.getMessage());
+            } catch (InputMismatchException inputMismatchException) {
+                printErrorMessage("Invalid input, please try again.");
             }
         }
     }

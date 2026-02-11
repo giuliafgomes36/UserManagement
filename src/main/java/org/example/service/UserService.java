@@ -3,6 +3,7 @@ package org.example.service;
 import org.example.exception.UserAlreadyExistsException;
 import org.example.exception.UserDoesNotExistsException;
 import org.example.model.User;
+import org.example.validation.UserValidator;
 
 import java.util.ArrayList;
 
@@ -11,6 +12,9 @@ public class UserService {
     private static ArrayList<User> userList = new ArrayList<>();
 
     public void addUser(User user) {
+        var validator = new UserValidator();
+        validator.validateNewUser(user);
+
         if(checkIfUserExists(user.getEmail())) {
             throw new UserAlreadyExistsException(user.getEmail());
         } else {
@@ -19,16 +23,25 @@ public class UserService {
     }
 
     public void updateUserName(String email, String newName) {
+        var validator = new UserValidator();
+        validator.validateUserNameAndEmail(newName, email);
+
         var userToBeUpdated = findUserWithEmail(email);
         userToBeUpdated.setName(newName);
     }
 
     public void updateUserAge(String email, int age) {
+        var validator = new UserValidator();
+        validator.validateEmail(email);
+
         var userToBeUpdated = findUserWithEmail(email);
         userToBeUpdated.setAge(age);
     }
 
     public void deleteUser(String email) {
+        var validator = new UserValidator();
+        validator.validateEmail(email);
+
         var userToBeDeleted = findUserWithEmail(email);
         userList.remove(userToBeDeleted);
     }
@@ -56,7 +69,6 @@ public class UserService {
         UserService.userList = userList;
     }
 
-    //true: user exists, false: user does not exist.
     private boolean checkIfUserExists(String email) {
         return userList.stream().anyMatch(x -> x.getEmail().equalsIgnoreCase(email));
     }
