@@ -9,7 +9,7 @@ import java.util.ArrayList;
 
 public class UserService {
 
-    private static ArrayList<User> userList = new ArrayList<>();
+    private ArrayList<User> userList = new ArrayList<>();
 
     public void addUser(User user) {
         var validator = new UserValidator();
@@ -66,7 +66,7 @@ public class UserService {
     }
 
     public void setUserList(ArrayList<User> userList) {
-        UserService.userList = userList;
+        this.userList = userList;
     }
 
     private boolean checkIfUserExists(String email) {

@@ -13,6 +13,7 @@ public class Main {
     public static void main (String[] args) {
     System.out.println("\u001B[42m" + "WELCOME TO USER MANAGEMENT" + "\u001B[0m");
         var runProgram = "run";
+        UserService userService = new UserService();
 
         while(runProgram.equals("run"))
         {
@@ -21,8 +22,6 @@ public class Main {
 
                 printActions();
                 var input = scanner.next();
-
-                UserService userService = new UserService();
 
                 switch(input) {
                     case "1":
