@@ -15,7 +15,6 @@ This project was developed for the purpose of studies of basic Java structure, M
 ```
 ├── docs/ #Images
 ├── src/ #Source code
-├── target/ #Compiled artifacts
 ├── pom.xml #Maven configuration
 ├── Dockerfile #Docker configuration
 └── README.md
